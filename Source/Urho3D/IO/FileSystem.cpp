@@ -205,8 +205,7 @@ class AsyncExecRequest : public Thread
 public:
     /// Construct.
     explicit AsyncExecRequest(unsigned& requestID) :
-        requestID_(requestID),
-        completed_(false)
+        requestID_(requestID)
     {
         // Increment ID for next request
         ++requestID;
@@ -225,11 +224,11 @@ public:
 
 protected:
     /// Request ID.
-    unsigned requestID_;
+    unsigned requestID_{};
     /// Exit code.
     int exitCode_{};
     /// Completed flag.
-    volatile bool completed_;
+    volatile bool completed_{};
 };
 
 /// Async system command operation.
@@ -284,9 +283,7 @@ private:
 };
 
 FileSystem::FileSystem(Context* context) :
-    Object(context),
-    nextAsyncExecID_(1),
-    executeConsoleCommands_(false)
+    Object(context)
 {
     SubscribeToEvent(E_BEGINFRAME, URHO3D_HANDLER(FileSystem, HandleBeginFrame));
 

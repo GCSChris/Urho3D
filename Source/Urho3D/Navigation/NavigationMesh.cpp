@@ -347,7 +347,7 @@ bool NavigationMesh::Allocate(const BoundingBox& boundingBox, unsigned maxTiles)
     unsigned tileBits = LogBaseTwo(maxTiles);
     auto maxPolys = (unsigned)(1 << (22 - tileBits));
 
-    dtNavMeshParams params{};
+    dtNavMeshParams params;     // NOLINT(hicpp-member-init)
     rcVcopy(params.orig, &boundingBox_.min_.x_);
     params.tileWidth = tileEdgeLength;
     params.tileHeight = tileEdgeLength;
@@ -423,7 +423,7 @@ bool NavigationMesh::Build()
         unsigned tileBits = LogBaseTwo(maxTiles);
         auto maxPolys = (unsigned)(1 << (22 - tileBits));
 
-        dtNavMeshParams params{};
+        dtNavMeshParams params;     // NOLINT(hicpp-member-init)
         rcVcopy(params.orig, &boundingBox_.min_.x_);
         params.tileWidth = tileEdgeLength;
         params.tileHeight = tileEdgeLength;
@@ -889,7 +889,7 @@ void NavigationMesh::SetNavigationDataAttr(const PODVector<unsigned char>& value
     numTilesX_ = buffer.ReadInt();
     numTilesZ_ = buffer.ReadInt();
 
-    dtNavMeshParams params{};
+    dtNavMeshParams params;     // NOLINT(hicpp-member-init)
     rcVcopy(params.orig, &boundingBox_.min_.x_);
     params.tileWidth = buffer.ReadFloat();
     params.tileHeight = buffer.ReadFloat();
@@ -1310,7 +1310,7 @@ bool NavigationMesh::BuildTile(Vector<NavigationGeometryInfo>& geometryList, int
 
     SimpleNavBuildData build;
 
-    rcConfig cfg{};
+    rcConfig cfg;       // NOLINT(hicpp-member-init)
     memset(&cfg, 0, sizeof cfg);
     cfg.cs = cellSize_;
     cfg.ch = cellHeight_;
@@ -1465,7 +1465,7 @@ bool NavigationMesh::BuildTile(Vector<NavigationGeometryInfo>& geometryList, int
     unsigned char* navData = nullptr;
     int navDataSize = 0;
 
-    dtNavMeshCreateParams params{};
+    dtNavMeshCreateParams params;       // NOLINT(hicpp-member-init)
     memset(&params, 0, sizeof params);
     params.verts = build.polyMesh_->verts;
     params.vertCount = build.polyMesh_->nverts;

@@ -35,14 +35,7 @@ namespace Urho3D
 
 VertexBuffer::VertexBuffer(Context* context, bool forceHeadless) :
     Object(context),
-    GPUObject(forceHeadless ? nullptr : GetSubsystem<Graphics>()),
-    lockState_(LOCK_NONE),
-    lockStart_(0),
-    lockCount_(0),
-    lockScratchData_(nullptr),
-    shadowed_(false),
-    dynamic_(false),
-    discardLock_(false)
+    GPUObject(forceHeadless ? nullptr : GetSubsystem<Graphics>())
 {
     UpdateOffsets();
 

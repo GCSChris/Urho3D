@@ -76,12 +76,8 @@ void CrowdAgentUpdateCallback(dtCrowdAgent* ag, float dt)
 
 CrowdManager::CrowdManager(Context* context) :
     Component(context),
-    crowd_(nullptr),
-    navigationMeshId_(0),
     maxAgents_(DEFAULT_MAX_AGENTS),
-    maxAgentRadius_(DEFAULT_MAX_AGENT_RADIUS),
-    numQueryFilterTypes_(0),
-    numObstacleAvoidanceTypes_(0)
+    maxAgentRadius_(DEFAULT_MAX_AGENT_RADIUS)
 {
     // The actual buffer is allocated inside dtCrowd, we only track the number of "slots" being configured explicitly
     numAreas_.Reserve(DT_CROWD_MAX_QUERY_FILTER_TYPE);
@@ -363,7 +359,7 @@ void CrowdManager::SetObstacleAvoidanceTypesAttr(const VariantVector& value)
     {
         if (index + 10 <= value.Size())
         {
-            dtObstacleAvoidanceParams params{};
+            dtObstacleAvoidanceParams params;       // NOLINT(hicpp-member-init)
             params.velBias = value[index++].GetFloat();
             params.weightDesVel = value[index++].GetFloat();
             params.weightCurVel = value[index++].GetFloat();

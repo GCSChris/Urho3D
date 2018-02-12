@@ -118,7 +118,7 @@ public:
     /// Construct.
     explicit View(Context* context);
     /// Destruct.
-    ~View() override;
+    ~View() override = default;
 
     /// Define with rendertarget and viewport. Return true if successful.
     bool Define(RenderSurface* renderTarget, Viewport* viewport);
@@ -313,25 +313,25 @@ private:
     /// Renderer subsystem.
     WeakPtr<Renderer> renderer_;
     /// Scene to use.
-    Scene* scene_;
+    Scene* scene_{};
     /// Octree to use.
-    Octree* octree_;
+    Octree* octree_{};
     /// Viewport (rendering) camera.
-    Camera* camera_;
+    Camera* camera_{};
     /// Culling camera. Usually same as the viewport camera.
-    Camera* cullCamera_;
+    Camera* cullCamera_{};
     /// Shared source view. Null if this view is using its own culling.
     WeakPtr<View> sourceView_;
     /// Zone the camera is inside, or default zone if not assigned.
-    Zone* cameraZone_;
+    Zone* cameraZone_{};
     /// Zone at far clip plane.
-    Zone* farClipZone_;
+    Zone* farClipZone_{};
     /// Occlusion buffer for the main camera.
-    OcclusionBuffer* occlusionBuffer_;
+    OcclusionBuffer* occlusionBuffer_{};
     /// Destination color rendertarget.
-    RenderSurface* renderTarget_;
+    RenderSurface* renderTarget_{};
     /// Substitute rendertarget for deferred rendering. Allocated if necessary.
-    RenderSurface* substituteRenderTarget_;
+    RenderSurface* substituteRenderTarget_{};
     /// Texture(s) for sampling the viewport contents. Allocated if necessary.
     Texture* viewportTextures_[MAX_VIEWPORT_TEXTURES]{};
     /// Color rendertarget active for the current renderpath command.
@@ -349,7 +349,7 @@ private:
     /// Destination rendertarget size.
     IntVector2 rtSize_;
     /// Information of the frame being rendered.
-    FrameInfo frame_;
+    FrameInfo frame_{};
     /// View aspect ratio.
     float aspectRatio_{};
     /// Minimum Z value of the visible scene.
@@ -434,7 +434,7 @@ private:
     /// Pointer to the forwardlights command if any.
     const RenderPathCommand* forwardLightsCommand_{};
     /// Pointer to the current commmand if it contains shader parameters to be set for a render pass.
-    const RenderPathCommand* passCommand_;
+    const RenderPathCommand* passCommand_{};
     /// Flag for scene being resolved from the backbuffer.
     bool usedResolve_{};
 };
